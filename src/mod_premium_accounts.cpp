@@ -7,6 +7,7 @@ using namespace Acore::ChatCommands;
 
 uint32 allPremiumBitmask;
 int premiumRealmId;
+std::string premiumMailText;
 
 struct PremiumItems
 {
@@ -369,7 +370,7 @@ private:
             {
                 if (requestedRewards & item.bitMask)
                 {
-                    SendMailTo(player, item.name, "Not yet implemented", item.itemId, 1);
+                    SendMailTo(player, item.name, premiumMailText, item.itemId, 1);
                 }
             }
 
@@ -407,6 +408,7 @@ public:
 
     void OnAfterConfigLoad(bool /*reload*/) override
     {
+        premiumMailText = sConfigMgr->GetOption<std::string>("PremiumAccounts.MailText", "Thank you for supporting our server!");
         premiumRealmId = sConfigMgr->GetOption<uint32>("RealmID", 0);
         LoadPremiumItems();
     }

@@ -1,0 +1,4 @@
+[worldserver]
+
+# The mail text sent when items are mailed to the player
+PremiumAccounts.MailText = "Thank you for supporting our server!"
