@@ -1,3 +1,6 @@
+# Do not use
+I have to rewrite most of the base of this module. I will add entries to the `premium_accounts` table for every item the account has rather than bitmasks. The module is unusable in its current state.
+
 # Premium Accounts
 This will give players the ability earn special rewards. It could be used to reward players for donating or helping out in some way, but the use for it is up to you.
 
