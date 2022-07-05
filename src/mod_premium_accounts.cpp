@@ -2,6 +2,7 @@
 #include "Config.h"
 #include "Player.h"
 #include "ScriptMgr.h"
+#include "Tokenize.h"
 
 using namespace Acore::ChatCommands;
 
@@ -406,10 +407,17 @@ class PremiumWorld : public WorldScript
 public:
     PremiumWorld() : WorldScript("PremiumServer") {}
 
-    void OnAfterConfigLoad(bool /*reload*/) override
+    void OnAfterConfigLoad(bool reload) override
     {
         premiumMailText = sConfigMgr->GetOption<std::string>("PremiumAccounts.MailText", "Thank you for supporting our server!");
         premiumRealmId = sConfigMgr->GetOption<uint32>("RealmID", 0);
+
+        if (reload)
+            LoadPremiumItems();
+    }
+
+    void OnStartup() override
+    {
         LoadPremiumItems();
     }
 
@@ -418,24 +426,29 @@ private:
     {
         allPremiumBitmask = 0;
         premiumItems.clear();
+        uint32 bitMask = 0;
+        int i = 0;
+        std::string stringItemIds(sConfigMgr->GetOption<std::string>("PremiumAccounts.Items", ""));
+        for (std::string_view id : Acore::Tokenize(stringItemIds, ';', false))
+        {
+            uint32 entry = Acore::StringTo<uint32>(id).value_or(0);
 
-        premiumItems.push_back(PremiumItems());
-        premiumItems[0].name = "Zergling Leash";
-        premiumItems[0].itemId = 13582;
-        premiumItems[0].bitMask = 1;
-        allPremiumBitmask |= premiumItems[0].bitMask;
+            if (const ItemTemplate* item = sObjectMgr->GetItemTemplate(entry))
+            {
+                if (bitMask == 0)
+                    bitMask = 1;
+                else
+                    bitMask = bitMask * 2;
 
-        premiumItems.push_back(PremiumItems());
-        premiumItems[1].name = "Panda Collar";
-        premiumItems[1].itemId = 13583;
-        premiumItems[1].bitMask = 2;
-        allPremiumBitmask |= premiumItems[1].bitMask;
+                premiumItems.push_back(PremiumItems());
+                premiumItems[i].name = item->Name1;
+                premiumItems[i].itemId = entry;
+                premiumItems[i].bitMask = bitMask;
+                allPremiumBitmask |= premiumItems[i].bitMask;
 
-        premiumItems.push_back(PremiumItems());
-        premiumItems[2].name = "Diablo Stone";
-        premiumItems[2].itemId = 13584;
-        premiumItems[2].bitMask = 4;
-        allPremiumBitmask |= premiumItems[2].bitMask;
+                i++;
+            }
+        }
     }
 };
 
