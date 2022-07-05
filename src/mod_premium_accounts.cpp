@@ -30,8 +30,8 @@ public:
         {
             { "add", HandleAddPremiumAccountCommand, SEC_GAMEMASTER, Console::Yes },
             { "remove", HandleRemovePremiumAccountCommand, SEC_GAMEMASTER, Console::Yes },
-            { "addbit", HandlePremiumAccountAddBitmaskCommand, SEC_GAMEMASTER, Console::Yes },
-            { "removebit", HandlePremiumAccountRemoveBitmaskCommand, SEC_GAMEMASTER, Console::Yes },
+            { "additem", HandlePremiumAccountAddItemCommand, SEC_GAMEMASTER, Console::Yes },
+            { "removeitem", HandlePremiumAccountRemoveItemCommand, SEC_GAMEMASTER, Console::Yes },
         };
 
         static ChatCommandTable premiumCommandTable =
@@ -105,7 +105,7 @@ public:
         return true;
     }
 
-    static bool HandlePremiumAccountAddBitmaskCommand(ChatHandler* handler, std::string const& accountName, uint32 bitmask)
+    static bool HandlePremiumAccountAddItemCommand(ChatHandler* handler, std::string const& accountName, uint32 bitmask)
     {
         uint32 accountId = GetAccountId(accountName);
 
@@ -159,7 +159,7 @@ public:
         return true;
     }
 
-    static bool HandlePremiumAccountRemoveBitmaskCommand(ChatHandler* handler, std::string const& accountName, uint32 bitmask)
+    static bool HandlePremiumAccountRemoveItemCommand(ChatHandler* handler, std::string const& accountName, uint32 bitmask)
     {
         uint32 accountId = GetAccountId(accountName);
 
