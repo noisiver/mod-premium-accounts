@@ -13,4 +13,6 @@ You can change the text sent to the player when items are mailed to them from th
 # Warning
 If you've used the module and want to add more items, **do not** add new item ids anywhere but at the end of the list. The way the module works is it loads the list of items and assigns them a bitmask which is used to determine what rewards a player has access to. Adding item ids anywhere but the end of the config option will mess with those bitmasks and change the items the player has earned and received.
 
+**It's not recommended to use any item that is linked to a specific race, class or team.**
+
 The module is still in development and shouldn't be used for production yet.
