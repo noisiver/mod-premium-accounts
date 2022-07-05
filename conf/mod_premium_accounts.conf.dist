@@ -1,11 +1,1 @@
 [worldserver]
-
-# The list of item ids that are available to the players
-# If the module hasn't been used before, feel free to remove every item and add the items you want
-# Make sure to never add items anywhere but the end of the list if the module has been used before adding new items
-# Failing to follow this will mess with the bitmask that gets set when the items are loaded from this config
-# The item ids are separated by a semicolon
-PremiumAccounts.Items = "23712;23713;25535;30360;33993;34425;34492;34493;34518;34519;34955;35227;37297;37298;38658;39286;39656;41133;44819;45180;46767;46802;46892;48527;49287;49343;49646;49662;49663;49665;49693;54810;54847;54857;56806"
-
-# The mail text sent when items are mailed to the player
-PremiumAccounts.MailText = "Thank you for supporting our server!"
