@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+DB_AUTH_CUSTOM_PATHS+=(
+    "$MOD_PREMIUM_ACCOUNTS_ROOT/sql/auth/base/"
+)
