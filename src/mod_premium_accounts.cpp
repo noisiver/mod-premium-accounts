@@ -239,10 +239,7 @@ private:
         std::string query = "";
         if (!remove)
         {
-            if (enableAllPremiumRewards)
-                query = Acore::StringFormat("REPLACE INTO `premium_accounts` (`account_id`, `enabled_items`) VALUES (%i, %i)", accountId, allPremiumBitmask);
-            else
-                query = Acore::StringFormat("REPLACE INTO `premium_accounts` (`account_id`, `enabled_items`) VALUES (%i, 0)", accountId);
+            query = Acore::StringFormat("REPLACE INTO `premium_accounts` (`account_id`) VALUES (%i)", accountId);
         }
         else
         {
